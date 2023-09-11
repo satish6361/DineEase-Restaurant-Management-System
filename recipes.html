@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Always include this line of code!!! -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/general.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/queries.css" />
+
+  <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+  <header class="header">
+    <a href="#">
+      <img class="logo" alt="Omnifood logo" src="img/omnifood-logo.png" />
+    </a>
+
+    <button class="btn-mobile-nav">
+      <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+      <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+    </button>
+  </header>
+  <br />
+  <br />
+  <br />
+
+  <div class="container center-text">
+    <form action="/recipes/search" method="post">
+        <select class="btn btn--form" name="name">  
+          <option  name="name" value = "All" class="btn btn--form"><p class="meal-attribute">All</p>    
+          </option> 
+          <option  name="name" value = "Veg" class="btn btn--form"> <p class="meal-attribute">Veg</p>   
+          </option>  
+          <option  name="name" value = "Non-Veg" class="btn btn--form"><p class="meal-attribute">Non-Veg</p>    
+          </option>  
+        </select> 
+      <button class="btn btn--form" >Filter</button>
+    </form>
+  </div>
+
+
+  <div id="root" class="container grid extra margin-bottom-md"></div>
+
+  <footer class="footer">
+    <div class="container grid grid--footer">
+      <div class="logo-col">
+        <a href="#" class="footer-logo">
+          <img class="logo" alt="Omnifood logo" src="img/omnifood-logo.png" />
+        </a>
+<!--
+        <ul class="social-links">
+          <li>
+            <a class="footer-link" href="#"
+              ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+            ></a>
+          </li>
+          <li>
+            <a class="footer-link" href="#"
+              ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+            ></a>
+          </li>
+          <li>
+            <a class="footer-link" href="#"
+              ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+            ></a>
+          </li>
+        </ul>-->
+
+        <p class="copyright">
+          Copyright &copy; 2022 by Omnifood, Inc. All rights reserved.
+        </p>
+      </div>
+
+      <div class="address-col">
+        <p class="footer-heading">Contact us</p>
+        <address class="contacts">
+          <p class="address">
+            Electronic City Phase - I, Near PES University Electronic City Campus Bangalore
+          </p>
+          <p>
+            <a class="footer-link" href="tel:415-201-6370">8431009674</a
+            ><br />
+            <a class="footer-link" href="mailto:hello@omnifood.com"
+              >omnifoods1@gmail.com</a
+            >
+          </p>
+        </address>
+      </div>
+
+      <nav class="nav-col">
+        <p class="footer-heading">Account</p>
+        <ul class="footer-nav">
+          <li><a class="footer-link" href="#sign">Create account</a></li>
+          <li><a class="footer-link" href="#sign">Sign in</a></li>
+          <!--<li><a class="footer-link" href="#">iOS app</a></li>
+          <li><a class="footer-link" href="#">Android app</a></li>-->
+        </ul>
+      </nav>
+
+      <nav class="nav-col">
+        <p class="footer-heading">Company</p>
+        <ul class="footer-nav">
+          <li><a class="footer-link" href="#hiw">About Omnifood</a></li>
+          <!--<li><a class="footer-link" href="#">For Business</a></li>
+          <li><a class="footer-link" href="#">Cooking partners</a></li>
+          <li><a class="footer-link" href="#">Careers</a></li>-->
+        </ul>
+      </nav>
+
+      <nav class="nav-col">
+        <p class="footer-heading">Resources</p>
+        <ul class="footer-nav">
+          <li><a class="footer-link" href="#meals">Recipe directory </a></li>
+          <!--<li><a class="footer-link" href="#">Help center</a></li>
+          <li><a class="footer-link" href="#">Privacy & terms</a></li>-->
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script type="text/babel">
+
+    class Gobi extends React.Component {
+      render() {
+        return (
+          <div class="meal1">
+            <img
+              src="img/meals/gobi-manchuri.jpg"
+              class="meal-img"
+              alt="gobi-manchuri"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegetarian">Veg</span>
+              </div>
+              <p class="meal-title">Gobi-manchuri</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>{this.props.value.calory}</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Cbiryani extends React.Component {
+      render() {
+        return (
+          <div class="meal2">
+            <img
+              src="img/meals/chicken-biryani.jpg"
+              class="meal-img"
+              alt="Chicken-Biryani"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Non-veg</span>
+              </div>
+              <p class="meal-title">Chicken-Biryani</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>{this.props.value.calory}</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Avocado extends React.Component {
+      render() {
+        return (
+          <div class="meal3">
+            <img
+              src="img/meals/meal-2.jpg"
+              class="meal-img"
+              alt="Avocado Salad"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>{this.props.value.calory}</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+    class VBurgrer extends React.Component {
+      render() {
+        return (
+          <div class="meal4">
+            <img
+              src="img/meals/veg-burger.jpg"
+              class="meal-img"
+              alt="veg-burger"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>{this.props.value.calory}</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class French extends React.Component {
+      render() {
+        return (
+          <div class="meal1">
+            <img
+              src="img/meals/french-fries.jpg"
+              class="meal-img"
+              alt="french-fries"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>{this.props.value.calory}</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Pakoda extends React.Component {
+      render() {
+        return (
+          <div class="meal2">
+            <img
+              src="img/meals/pakoda.jpg"
+              class="meal-img"
+              alt="pakoda"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>300</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Noodles extends React.Component {
+      render() {
+        return (
+          <div class="meal3">
+            <img
+              src="img/meals/noodles.jpg"
+              class="meal-img"
+              alt="noodles"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Non-veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>239</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Jamoon extends React.Component {
+      render() {
+        return (
+          <div class="meal4">
+            <img
+              src="img/meals/jamoon.jpg"
+              class="meal-img"
+              alt="jamoon"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>125</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Idli extends React.Component {
+      render() {
+        return (
+          <div class="meal1">
+            <img
+              src="img/meals/idli.jpg"
+              class="meal-img"
+              alt="idli"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>33</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Pburger extends React.Component {
+      render() {
+        return (
+          <div class="meal2">
+            <img
+              src="img/meals/paneer-burger.jpg"
+              class="meal-img"
+              alt="paneer-burger"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>400</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Puri extends React.Component {
+      render() {
+        return (
+          <div class="meal3">
+            <img
+              src="img/meals/puri.jpg"
+              class="meal-img"
+              alt="puri"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>400</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Sbiryani extends React.Component {
+      render() {
+        return (
+          <div class="meal2">
+            <img
+              src="img/meals/special-biryani.jpg"
+              class="meal-img"
+              alt="special-biryani"
+            />
+            <div class="meal-content">
+              <div class="meal-tags">
+                <span class="tag tag--vegan">Non-veg</span>
+
+              </div>
+              <p class="meal-title">{this.props.value.name}</p>
+              <ul class="meal-attributes">
+                <li class="meal-attribute">
+                  <ion-icon class="meal-icon" name="flame-outline"></ion-icon>
+                  <span><strong>400</strong> calories</span>
+                </li>
+                <li class="meal-attribute">
+                  <ion-icon
+                    class="meal-icon"
+                    name="restaurant-outline"
+                  ></ion-icon>
+                  <p class="plan-price"><span>&#8377;</span>{this.props.value.price}</p>
+                </li>
+
+                <li class="meal-attribute">
+                  <h3>Quantity : {this.props.value.count}</h3>
+                </li>
+                <li class="meal-attribute">
+                  <button class="btn btn--form" onClick={() => { this.props.onDec(this.props.value) }} >-</button>
+                  <button class="btn btn--form" onClick={() => { this.props.onInc(this.props.value) }}>+</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    }
+
+
+    class Cart extends React.Component {
+
+
+
+      render() {
+        return (
+          <div class="meal2">
+            <h2 class="meal-title"> Cart-items </h2>
+            <div class="meal-content">
+              <ul class="meal-attributes">
+                {this.props.array.map(product => {
+                return (
+                  <li >
+                    <div className="product-info">
+                      <p class="meal-title">{product.name}</p>
+                          <li class="meal-attribute">
+                      <ion-icon
+                        class="meal-icon"
+                        name="restaurant-outline"
+                      ></ion-icon>
+                      <p class="plan-price"><span>&#8377;</span>{product.price}</p>
+                    </li>
+                      
+                    </div>
+                    <li class="meal-attribute">
+                  <h3>Quantity : {product.count}</h3>
+                  <hr/>
+                    </li>
+                  </li>
+                
+                );
+            })}
+              </ul>
+              
+            </div>
+          </div>
+        )
+      }
+    }
+
+    class Main extends React.Component {
+      state = {
+        total: 0,
+        food: [{
+          name: "Gobi-Manchuri",
+          calory: 400,
+          price: 140,
+          count: 0
+        }, {
+          name: "Avacado Salad",
+          calory: 100,
+          price: 200,
+
+          count: 0
+        }, {
+          name: "Chicken-Biryani",
+          calory: 400,
+          price: 50,
+
+          count: 0
+        }, {
+          name: "Veg-burger",
+          calory: 400,
+          price: 150,
+
+          count: 0
+        }, {
+          name: "Paneer-burger",
+          calory: 400,
+          price: 250,
+
+          count: 0
+        }, {
+          name: "Puri",
+          calory: 400,
+          price: 50,
+
+          count: 0
+        }, {
+          name: "French-fries",
+          calory: 400,
+          price: 50,
+
+          count: 0
+        }, {
+          name: "Jamoon",
+          calory: 125,
+          price: 50,
+
+          count: 0
+        }, {
+          name: "Mutton-Biryani",
+          calory: 400,
+          price: 450,
+
+          count: 0
+        }, {
+          name: "Noodles",
+          calory: 239,
+          price: 50,
+
+          count: 0
+        }, {
+          name: "Idli",
+          price: 50,
+          calory: 33,
+
+          count: 0
+        }, {
+          name: "Pakoda",
+          calory: 400,
+          price: 50,
+
+          count: 0
+        }]
+      };
+
+      handleIncrement = (p) => {
+        let a = p.count;
+        a = a + 1;
+        this.setState((state) => {
+          p.count = a;
+          return state;
+        })
+      }
+
+      handleDecrement = (p) => {
+        let a = p.count;
+        a = a - 1;
+        if (a <= 0) {
+          a = 0;
+        }
+        this.setState((state) => {
+          p.count = a;
+          return state;
+        })
+      }
+
+
+      handleTotal = () => {
+        var sum = 0;
+        for (var i = 0; i < this.state.food.length; i++) {
+          if (this.state.food[i].count !== 0) {
+            sum = sum + this.state.food[i].count * this.state.food[i].price;
+          }
+        }
+
+        axios.post("/recipes/final", this.state.food);
+        return sum;
+      }
+      
+
+      handleCart = () => {
+        let a = [...this.state.food];
+          let newArray = [];
+          let j = 0;
+          let i = 0;
+          var sum = 0;
+          let k = 0;
+          while(i<a.length){
+              if (a[i].count !==0){
+                  newArray[j] = a[i];
+                  j++;
+              }
+              i++;
+          }
+
+          return newArray;
+      }
+
+      root = 
+      {
+              margin: "10px",
+              padding: "10px",
+              flexDirection: "row",
+              justifyContent: "flex-end"
+      };
+
+
+      render() {
+        return (
+          <div>
+            <div style = {root}>
+              <Gobi style = {root} value={this.state.food[0]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Avocado style = {root} value={this.state.food[1]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Cbiryani style = {root} value={this.state.food[2]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <VBurgrer style = {root} value={this.state.food[3]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Pburger style = {root} value={this.state.food[4]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Puri style = {root} value={this.state.food[5]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <French style = {root} value={this.state.food[6]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Jamoon style = {root} value={this.state.food[7]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Sbiryani style = {root} value={this.state.food[8]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Noodles style = {root} value={this.state.food[9]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Idli style = {root} value={this.state.food[10]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              <Pakoda style = {root} value={this.state.food[11]} onInc={this.handleIncrement} onDec={this.handleDecrement} />
+              </div>
+              <hr/>
+              <hr/>
+              <hr/>
+              <br />
+              <br />     <br />
+              <br />
+              <div>
+              <br />
+              <br />
+              <br />    <br />
+              <br />
+              <br />
+              <ul className="cart-items">
+              <Cart style = {root} array = {this.handleCart()}/>
+              </ul>
+              <br />
+              <header class="header1">
+                <nav>
+                  <ul class="main-nav-list" style = {root}>
+                    <li><a class="main-nav-link" href="#">Total Bill &nbsp;&nbsp; :</a></li>
+                    <li><p class="plan-price"><span>&#8377;</span>{this.handleTotal()}</p></li>
+                    <li><a class="main-nav-link nav-cta" href="/recipes/final/end">Proceed</a></li>
+                  </ul>
+                </nav>
+              </header>
+            </div>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Main />, document.getElementById("root"));
+  </script>
+</body>
+
+</html>

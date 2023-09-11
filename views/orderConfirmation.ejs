@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+      <!-- Always include this line of code!!! -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <script
+        type="module"
+        src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+      ></script>
+      <script
+        nomodule=""
+        src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+      ></script>
+      <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    </head>
+    <body>
+
+        <h1> Dear <%= name %>,</h1>
+        <br/>
+        <h2>Thank you for choosing Omnifood!!!</h2>
+        <br/>
+        <h3> Ordered food details : </h3>
+
+        <h2>Order ID : <%= tableID %></h2>
+        <br/>
+        <div>
+            <% for (let i = 0;i < obj.length;i++) { %>
+             <h2><ion-icon class="meal-icon" name="star-outline"></ion-icon> &nbsp; Food Name : <%= obj[i].name %> , Quantity : <%= obj[i].count %>, Food Price : &#8377; <%= obj[i].price %></h2>
+           <% } %>
+        </div>
+
+        <h3>Total Bill : &nbsp; &#8377; <%= total %></h3>
+
+        <br/> <br/>
+        <h2 class="heading-secondary">
+            Thanks for ordering the food, <%= name %>
+        </h2>
+            
+        <p>Please enjoy, and let us know if there’s anything else we can help you with.</p>
+
+        <h3>The Omnifood Team</h3>
+
+    </body>
+</html>
