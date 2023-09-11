@@ -1,4 +1,4 @@
-# DineEase - A Restaurant Management System
+# OmniFood - A Restaurant Management System
 
 
 ##Description
