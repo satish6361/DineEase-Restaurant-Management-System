@@ -1,4 +1,4 @@
-# DineEase-A Restaurant Management System
+# DineEase- A Restaurant Management System
 
 
 ##Description
