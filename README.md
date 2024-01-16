@@ -1,7 +1,7 @@
 # OmniFood - A Restaurant Management System
 
 
-##Description
+#Description
 Omnifood is an **Web development based Restaurant Management System** that aims to digitalize the process of restaurant operations including **ordering, billing, payment management**. 
 
 The main purpose is to **improve the performance** of the restaurant by eradicating the daily paperwork. With this system the tasks
